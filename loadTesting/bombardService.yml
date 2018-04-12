@@ -1,0 +1,39 @@
+
+//To run this test open bash/cmd in this directory and run in console; artillery run bombardService.yml
+{
+    config: {
+        target: "http://localhost:3004/order",
+            phases: [{
+                duration: 30,
+                arrivalRate: 3
+            }
+            ]
+    },
+    scenarios: [{
+        flow: [{
+            get: { url: "/" },
+            post: {
+                url: "/makeorder",
+                json: [
+                    {
+                        "ean": 'CG1',
+                        "name": 'Nut',
+                        "qtyReq": '1',
+                        "stockQty": '40',
+                        "productPrice": '40',
+                        "custoRef": 'test@test.com'
+                    },
+                    {
+                        "ean": 'CG2',
+                        "name": 'Sling',
+                        "qtyReq": '1',
+                        "stockQty": '20',
+                        "productPrice": '1',
+                        "custoRef": 'test@test.com'
+                    }]
+            }
+        }
+        ]
+    }
+    ]
+}

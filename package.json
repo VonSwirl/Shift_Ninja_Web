@@ -1,0 +1,38 @@
+{
+  "name": "Shift_Ninja_Web",
+  "version": "1.0.0",
+  "description": "FYP Web Application. Shift_Ninja_Web represents a micro service webapp which is part of a larger project. It is a standalone component in its own right.",
+  "main": "shiftNinjaControlletr.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VonSwirl/Shift_Ninja_Web.git"
+  },
+  "keywords": [],
+  "author": "Jerome Hurley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VonSwirl/Shift_Ninja_Web/issues"
+  },
+  "homepage": "https://github.com/VonSwirl/Shift_Ninja_Web#readme",
+  "dependencies": {
+    "bindata": "0.0.2",
+    "body-parser": "^1.18.2",
+    "bson": "^2.0.5",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "json-query": "^2.2.2",
+    "jsonwebtoken": "^7.4.3",
+    "moment": "^2.22.0",
+    "mongoose": "^4.13.12",
+    "pug": "^2.0.3",
+    "request": "^2.85.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0",
+    "nodemon": "^1.17.3"
+  }
+}

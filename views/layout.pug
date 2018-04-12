@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+      title Shift Ninja
+      link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb', crossorigin='anonymous')
+      link(rel='stylesheet', href='/static/css/main.css')
+      body
+        nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4p
+          .container
+              a.navbar-brand(href='#') Recruits
+              button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+              #navbarCollapse.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                  li.nav-item.active
+                    a.nav-link(href='#')
+                      | Home 
+                      span.sr-only (current)
+                  li.nav-item
+                      a.nav-link(href='#') Invoices
+                  li.nav-item
+                      a.nav-link(href='#') Purchases
+                  li.nav-item
+                      a.nav-link(href='#') Customers    
+      block content
