@@ -6,6 +6,6 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-CMD node shiftNinjaController.js
+CMD node index.js
 # replace this with your application's default port
 EXPOSE 3004
