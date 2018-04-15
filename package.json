@@ -1,8 +1,8 @@
 {
-  "name": "Shift_Ninja_Web",
+  "name": "shift_ninja_web",
   "version": "1.0.0",
   "description": "FYP Web Application. Shift_Ninja_Web represents a micro service webapp which is part of a larger project. It is a standalone component in its own right.",
-  "main": "shiftNinjaControlletr.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/VonSwirl/Shift_Ninja_Web#readme",
   "dependencies": {
+    "angular": "^1.6.9",
     "bindata": "0.0.2",
     "body-parser": "^1.18.2",
     "bson": "^2.0.5",

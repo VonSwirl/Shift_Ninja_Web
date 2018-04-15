@@ -1,19 +1,16 @@
 
 //To run this test open bash/cmd in this directory and run in console; artillery run bombardService.yml
-{
-    config: {
-        target: "http://localhost:3004/order",
+{config: {
+        target: "http://localhost:3004/recruits",
             phases: [{
                 duration: 30,
                 arrivalRate: 3
-            }
-            ]
-    },
+            }]},
+    
     scenarios: [{
         flow: [{
             get: { url: "/" },
-            post: {
-                url: "/makeorder",
+            post: {url: "/newRecruit",
                 json: [
                     {
                         "ean": 'CG1',
@@ -32,8 +29,6 @@
                         "custoRef": 'test@test.com'
                     }]
             }
-        }
-        ]
-    }
-    ]
+        }]
+    }]
 }

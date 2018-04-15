@@ -36,6 +36,7 @@ build/Release
 node_modules/
 jspm_packages/
 
+
 # Typescript v1 declaration files
 typings/
 
@@ -58,9 +59,9 @@ typings/
 .env
 
 # My INGNORED FILES/FOLDER 
-.config.js
-config.js
+/settings.json
 /config.js
-/.config.js
 MyHelpers/
-
+FILE BACKUP/
+.vscode/
+settings.json
