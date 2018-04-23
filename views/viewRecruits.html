@@ -13,13 +13,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>View Recruits</title>
-    
+
 
     <script src="./resources/js/vendor/jquery.min.js"></script>
     <script src="./resources/js/vendor/angular.min.js"></script>
     <script src="./resources/js/vendor/jquery.dataTables.min.js"></script>
-    <script src="../controllers/dataTableController.js"></script>
+    <!--<script src="../controllers/datatableController.js"></script>-->
     <script src="./resources/js/vendor/modernizr.min.js"></script>
+    <script>$(document).ready(function () {
+        $('#viewRecruitTable').DataTable({
+            ajax: {
+                url: '/',
+                type: 'POST'
+              },
+              serverSide: true,
+              columns: [
+                {'data': 'username'},
+                {'data': 'name'},
+                {'data': 'email'}
+              ]
+            });
+    
+        /*  ajax: "../views/resources/images/2500.txt",
+         deferRender: true */
+        //});
+    });</script>
 
     <link rel="stylesheet" href="./resources/styles/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/styles/dataTables.css">
@@ -28,7 +46,7 @@
     <link rel="stylesheet" href="./resources/styles/magnific-popup.css">
     <link rel="stylesheet" href="./resources/styles/style.css">
     <link rel="stylesheet" href="./resources/styles/responsive.css" />
-   
+
 </head>
 
 <body>
@@ -107,15 +125,13 @@
 
 
     <section class="dataView-area">
-       <div id="dataView">
-            <table id="viewRecruitTable" class="table table-striped table-bordered dt-responsive" style="width:100%">
+        <div id="dataView">
+            <table id="viewRecruitTable" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>ZIP / Post code</th>
-                        <th>Country</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
             </table>

@@ -1,29 +1,53 @@
 //Constraints below are dependencies required by this routing file.
+
 const express = require('express');
+const mongoose = require('mongoose');
 const rOut = express.Router();
 const validateRecruit = require('../controllers/validateDataController.js');
 const forwardingService = require('../controllers/recruitsForwardingController.js');
 
+
 //Retrieves values from JSON objects for data binding. 
 //Offers params, nested queries, deep queries, custom reduce/filter functions and simple boolean logic.
 var jsonQuery = require('json-query')
-
 //Allows access to our Recruit Data Model
-const Recruits = require('../models/recruitsModel.js');
-
+const Recruit = require('../models/recruitsModel.js');
 //Allows Parsing, validating, manipulation, and to display dates and times in JS.
 const moment = require('moment');
+
+var hmm = null;
+rOut.get('/view-all', function (req, res, next) {
+
+
+    Recruit.find({}, function (err, allRecs) {
+       hmm = JSON.parse(JSON.stringify(allRecs));
+        //Or: 
+        //return JSON.parse(JSON.stringify(users));
+        console.log(hmm);
+        res.send("Get happy");
+        //res.render
+    });
+
+    /*  Recruit.find().lean().then(function (Recruit) {
+         var hmm = JSON.stringify(Recruit);
+         //return res.end(JSON.stringify(Recruit));
+     }); */
+
+});
 
 /**
  * 
  */
-rOut.post('/newRecruit', function (req, res, next) {
-    validateRecruit.isRecruitUnique(req).then(function (recruitValid) {
 
+rOut.post('/newRecruit', function (req, res, next) {
+    console.log("POSTED");
+    validateRecruit.isRecruitUnique(req).then(function (recruitValid) {
         if (recruitValid) {
             var recruitBody = req.body;
-            
-            res.render('viewRecruit', {val: recruitBody});
+
+            res.send("Success");
+
+            //res.render('viewRecruits', { val: recruitBody });
         }
     }).catch(next);
 });
@@ -34,7 +58,7 @@ rOut.get('/viewRecruitByID/:recID', function (req, res, next) {
     var count = 0;
     //Get their current id and compare to check who they are then call another function
     //console.log(req.params.ean);
-    Recruits.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
+    Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
         var productsList = [];
         var count = 0;
         Recruit.products.forEach(() => {
@@ -67,6 +91,10 @@ rOut.get('/displayRecruits/:custoRef', function (req, res, next) {
     Recruits.find({ custoRef: req.params.custoRef }).then(function (Recruit) {
         res.render('viewRecruit', { RecruitList: Recruit });
     }).catch(next);
+});
+
+rOut.get('/test', function (req, res, next) {
+    res.send("Get happy");
 });
 
 /**
