@@ -1,10 +1,11 @@
 //Constraints below are dependencies required by this routing file.
-
+var bodyParser = require('body-parser')
 const express = require('express');
 const mongoose = require('mongoose');
 const rOut = express.Router();
 const validateRecruit = require('../controllers/validateDataController.js');
 const forwardingService = require('../controllers/recruitsForwardingController.js');
+//const dtController = require('../controllers/datatableController.js');
 
 
 //Retrieves values from JSON objects for data binding. 
@@ -15,41 +16,47 @@ const Recruit = require('../models/recruitsModel.js');
 //Allows Parsing, validating, manipulation, and to display dates and times in JS.
 const moment = require('moment');
 
-var hmm = null;
+/* var hmm = null;
 rOut.get('/view-all', function (req, res, next) {
 
 
     Recruit.find({}, function (err, allRecs) {
-       hmm = JSON.parse(JSON.stringify(allRecs));
+        console.log(allRecs);
+        dtController.allRecruits = allRecs;
+        //hmm = JSON.parse(allRecs);
         //Or: 
         //return JSON.parse(JSON.stringify(users));
         console.log(hmm);
-        res.send("Get happy");
+
+        res.send(allRecs);
         //res.render
     });
 
-    /*  Recruit.find().lean().then(function (Recruit) {
+ Recruit.find().lean().then(function (Recruit) {
          var hmm = JSON.stringify(Recruit);
          //return res.end(JSON.stringify(Recruit));
-     }); */
+     }); 
 
-});
+}); 
+*/
 
 /**
  * 
  */
-
-rOut.post('/newRecruit', function (req, res, next) {
-    console.log("POSTED");
-    validateRecruit.isRecruitUnique(req).then(function (recruitValid) {
-        if (recruitValid) {
-            var recruitBody = req.body;
-
-            res.send("Success");
-
-            //res.render('viewRecruits', { val: recruitBody });
-        }
-    }).catch(next);
+rOut.post('/viewRecruits', function (req, res, next) {
+    Recruit.dataTables({
+        limit: req.body.length,
+        skip: req.body.start,
+        order: req.body.order,
+        columns: req.body.columns
+    }).then(function (table) {
+        res.json({
+            data: table.data,
+            recordsFiltered: table.total,
+            recordsTotal: table.total
+        });
+        console.log('here!');
+    });
 });
 
 //TODO

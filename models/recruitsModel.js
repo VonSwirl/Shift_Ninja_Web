@@ -29,6 +29,8 @@ const recruitsSchema = new Schema({
     recFirstN: { type: String },
     recSurN: { type: String },
     recForeN: { type: String },
+    recAddress: {type: String},
+    recMobile:{type: Number},
     allQuals: [qualificationsSchema],
     recActive: { type: Boolean, default: false },
     recExperience: { type: String },
@@ -38,7 +40,7 @@ const recruitsSchema = new Schema({
 
 recruitsSchema.plugin(dataTables);
 
-const Recruit = mongoose.model('recruitsModel', recruitsSchema);
+var Recruit = mongoose.model('recruitsModel', recruitsSchema);
 
 //This exports the model.
 module.exports = Recruit;
