@@ -1,49 +1,43 @@
 //Constraints below are dependencies required by this routing file.
-var bodyParser = require('body-parser')
 const express = require('express');
 const mongoose = require('mongoose');
 const rOut = express.Router();
 const validateRecruit = require('../controllers/validateDataController.js');
 const forwardingService = require('../controllers/recruitsForwardingController.js');
-//const dtController = require('../controllers/datatableController.js');
 
+//Helps to locate the correct path of files
+var path = require('path');
 
 //Retrieves values from JSON objects for data binding. 
-//Offers params, nested queries, deep queries, custom reduce/filter functions and simple boolean logic.
-var jsonQuery = require('json-query')
+var bodyParser = require('body-parser');
+
 //Allows access to our Recruit Data Model
 const Recruit = require('../models/recruitsModel.js');
+
 //Allows Parsing, validating, manipulation, and to display dates and times in JS.
 const moment = require('moment');
 
-/* var hmm = null;
-rOut.get('/view-all', function (req, res, next) {
-
-
-    Recruit.find({}, function (err, allRecs) {
-        console.log(allRecs);
-        dtController.allRecruits = allRecs;
-        //hmm = JSON.parse(allRecs);
-        //Or: 
-        //return JSON.parse(JSON.stringify(users));
-        console.log(hmm);
-
-        res.send(allRecs);
-        //res.render
-    });
-
- Recruit.find().lean().then(function (Recruit) {
-         var hmm = JSON.stringify(Recruit);
-         //return res.end(JSON.stringify(Recruit));
-     }); 
-
-}); 
-*/
+/**
+ * TODO
+ */
+rOut.get('/', function (req, res) {
+    res.sendFile(path.resolve('./views/login.html'));
+});
 
 /**
- * 
+ * TODO
  */
-rOut.post('/viewRecruits', function (req, res, next) {
+rOut.post('/login', function (req, res) {
+    var user_name = req.body.user;
+    var password = req.body.password;
+    console.log("User name = " + user_name + ", password is " + password);
+    res.end("yes");
+});
+
+/**
+ * TODO
+ */
+rOut.post('/viewAllRecruits', function (req, res, next) {
     Recruit.dataTables({
         limit: req.body.length,
         skip: req.body.start,
@@ -55,34 +49,23 @@ rOut.post('/viewRecruits', function (req, res, next) {
             recordsFiltered: table.total,
             recordsTotal: table.total
         });
-        console.log('here!');
+
     });
 });
 
-//TODO
-//Get a single item to be able to edit prices
-rOut.get('/viewRecruitByID/:recID', function (req, res, next) {
-    var count = 0;
-    //Get their current id and compare to check who they are then call another function
-    //console.log(req.params.ean);
+/**
+ * TODO
+ */
+rOut.post('/viewRecruitDetails/:recID', function (req, res, next) {
     Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
-        var productsList = [];
-        var count = 0;
-        Recruit.products.forEach(() => {
-            productsList.push(Recruit.products[count]);
-            count++;
-        }, this);
-        console.log(count, productsList);
-        res.render('viewProductsInRecruit', { productsList });
+        console.log(Recruit);
+        res.render('recruitDetails', { Recruit });
     }).catch(next);
 });
 
 /**
- * 
- * This post recieves and update for a products availablity. It queries the document for 
- * sub-documents with a matching EAN. If fount this sub doc value nowAvailable is set to true.
+ * TODO
  */
-//TODO
 rOut.put('/PurchasingUpdate/', function (req, res, next) {
     validateRecruit.purchasingServUpdateHandler(req).then(function (messageResponse) {
         res.send(messageResponse);
@@ -91,9 +74,8 @@ rOut.put('/PurchasingUpdate/', function (req, res, next) {
 });
 
 /**
- * This returns a view for the staff to see all of a customers Recruits 
+ * TODO
  */
-//TODO
 rOut.get('/displayRecruits/:custoRef', function (req, res, next) {
     Recruits.find({ custoRef: req.params.custoRef }).then(function (Recruit) {
         res.render('viewRecruit', { RecruitList: Recruit });
@@ -105,9 +87,7 @@ rOut.get('/test', function (req, res, next) {
 });
 
 /**
- * This put request receives a update from processing service. The request
- * should contain a customer reference number and also a boolean value.
- * The boolean value sets the customers purchase approvale to true or false
+ * TODO
  */
 rOut.put('/CustomerApprovalUpdate', function (req, res, next) {
     forwardingService.customerAuthUpdate(req.param.id, req.query.approved)
