@@ -6,7 +6,7 @@ function redirectToRecDetails(data) {
     var form = document.createElement('form');
     document.body.appendChild(form);
     form.method = 'post';
-    form.action = 'http://http://127.0.0.1:3000/shiftninja//viewRecruitDetails/' + data;
+    form.action = 'http://127.0.0.1:3000/shiftninja//viewRecruitDetails/' + data;
     /* for (var name in data) {
         var input = document.createElement('input');
         input.type = 'hidden';
