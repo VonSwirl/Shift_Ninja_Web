@@ -2,20 +2,27 @@
 function format(d) {
     return '<table >' + '</table>';
 }
-function redirectToRecDetails(data) {
-    var form = document.createElement('form');
-    document.body.appendChild(form);
-    form.method = 'post';
-    form.action = 'http://127.0.0.1:3000/shiftninja//viewRecruitDetails/' + data;
-    /* for (var name in data) {
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = data[name];
-        form.appendChild(input);
-    } */
-    form.submit();
-}
+/*   $.ajax({
+      type: 'POST',
+      contentType: 'application/json',
+      url: 'http://localhost:3000/shiftninja/viewRecruitDetails/'+data,
+      success: function (data) {
+          console.log('success');
+          console.log(JSON.stringify(data));
+      }
+  }); */
+
+
+//var urlString = 'http://localhost:3000/shiftninja/viewRecruitDetails/' + data;
+//window.location.replace(urlString);
+
+//$.post(urlLink).done(function (data, textStatus, jqXHR) {
+//    alert(data);
+//});
+
+
+
+
 $(document).ready(function () {
     //Table gets populated via the rOut post function in recruits.js
     var table = $('#viewRecruitTable').DataTable({
@@ -48,8 +55,8 @@ $(document).ready(function () {
         } else {
             row.child(format()).show();
             tr.addClass('shown');
-            if (recSelected != null) {                
-                    redirectToRecDetails(recSelected); 
+            if (recSelected != null) {
+                $.redirect("viewRecruitDetails/" + recSelected);
             }
         }
     });

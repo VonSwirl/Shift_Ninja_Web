@@ -8,6 +8,7 @@ const Recruit = require('./models/recruitsModel');
 const path = require('path');
 var referrerPolicy = require('referrer-policy');
 var cors = require('cors');
+const pug = require('pug');
 
 //This overrides the depricated mongoose Promise with node.js Promise
 mong.Promise = global.Promise;
@@ -20,11 +21,14 @@ var chooseEnviroment = ['development', 'local', 'deploy', 'test'];
 var useEnv = chooseEnviroment[0];
 process.env.NODE_ENV = useEnv;
 
-//Sets views folder for view pages
-expressApp.set('views', path.join(__dirname, 'views'));
+//Allows access to jquery, css, fonts, images to views
+app.use(express.static('public'));
 
 //Allows Express access to recruits.js for HTTP verb functions.
 expressApp.use('/shiftninja', require('./routers/recruits'));
+
+//expressApp.use('/resources',express.static(__dirname + '/resources'));
+//expressApp.use('/resources', express.static(path.join(__dirname, 'views/resources')));
 
 //Allow App to utilise pug for logic built pages
 expressApp.set('view engine', 'pug');

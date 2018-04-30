@@ -5,6 +5,7 @@ const rOut = express.Router();
 const validateRecruit = require('../controllers/validateDataController.js');
 const forwardingService = require('../controllers/recruitsForwardingController.js');
 
+
 //Helps to locate the correct path of files
 var path = require('path');
 
@@ -21,7 +22,7 @@ const moment = require('moment');
  * TODO
  */
 rOut.get('/', function (req, res) {
-    res.sendFile(path.resolve('./views/login.html'));
+    res.render('index.pug');
 });
 
 /**
@@ -32,6 +33,13 @@ rOut.post('/login', function (req, res) {
     var password = req.body.password;
     console.log("User name = " + user_name + ", password is " + password);
     res.end("yes");
+});
+
+/**
+ * TODO
+ */
+rOut.get('/recruits', function (req, res) {
+    res.render('viewRecruits.pug');
 });
 
 /**
@@ -49,17 +57,15 @@ rOut.post('/viewAllRecruits', function (req, res, next) {
             recordsFiltered: table.total,
             recordsTotal: table.total
         });
-
     });
 });
 
 /**
  * TODO
  */
-rOut.post('/viewRecruitDetails/:recID', function (req, res, next) {
+rOut.post('/viewRecruitDetails/:recRef', function (req, res, next) {
     Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
-        console.log(Recruit);
-        res.render('recruitDetails', { Recruit });
+        res.render('recruitDetails', { Recruit: Recruit });
     }).catch(next);
 });
 
