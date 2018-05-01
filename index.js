@@ -13,25 +13,44 @@ const pug = require('pug');
 //This overrides the depricated mongoose Promise with node.js Promise
 mong.Promise = global.Promise;
 
-//Allows Express to use body-parser tool to handle our JSON data.
-expressApp.use(bodyParser.json());
-
 //Change the apllication enviroment by choosing from the array provided 
 var chooseEnviroment = ['development', 'local', 'deploy', 'test'];
 var useEnv = chooseEnviroment[0];
 process.env.NODE_ENV = useEnv;
 
+//Allows Express to use body-parser tool to handle our JSON data.
 //Allows access to jquery, css, fonts, images to views
-app.use(express.static('public'));
-
+//App access to views folder
 //Allows Express access to recruits.js for HTTP verb functions.
+//Allow App to utilise pug for logic built pages
+//Cross-origin resource sharing (CORS)
+//Governs which referrer information is sent in the Referrer header. 
+expressApp.use(bodyParser.json());
+expressApp.use(bodyParser.urlencoded({ extended: true }));
+//expressApp.use(express.static('public'));
+expressApp.set('views', './views');
 expressApp.use('/shiftninja', require('./routers/recruits'));
-
+expressApp.use('/shiftninja', express.static(path.join(__dirname, 'public')));
+expressApp.set('view engine', 'pug');
+expressApp.use(cors());
+expressApp.use(referrerPolicy({ policy: 'origin-when-cross-origin' }));
+/**
+ * Middleware which handles errors on the rejection of a promise
+ * @param err this is the error message
+ * @param req this is what was requested from the client
+ * @param res is the response given back to client
+ */
+expressApp.use(function (err, req, res, next) {
+  //Returns the error in String form to the user
+  res.header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'https://apis.google.com'; Referrer-Policy 'origin-when-cross-origin';object-src 'none';img-src 'self' 'https:' 'data:';media-src 'self';frame-src 'https://www.google.co.uk/maps/';font-src 'self' 'https://www.w3.org/';connect-src 'self';style-src 'self' 'https://fonts.googleapis.com/';");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.status(422).send({ error: err.message });
+  console.log(err, req, res);
+});
 //expressApp.use('/resources',express.static(__dirname + '/resources'));
 //expressApp.use('/resources', express.static(path.join(__dirname, 'views/resources')));
-
-//Allow App to utilise pug for logic built pages
-expressApp.set('view engine', 'pug');
 
 //Connection to DB server depending on enviroment
 try {
@@ -114,28 +133,6 @@ if (useEnv != 'deploy') {
     }
   });
 };
-
-//Cross-origin resource sharing (CORS)
-expressApp.use(cors());
-
-//Governs which referrer information is sent in the Referrer header. 
-expressApp.use(referrerPolicy({ policy: 'origin-when-cross-origin' }));
-
-/**
- * Middleware which handles errors on the rejection of a promise
- * @param err this is the error message
- * @param req this is what was requested from the client
- * @param res is the response given back to client
- */
-expressApp.use(function (err, req, res, next) {
-  //Returns the error in String form to the user
-  res.header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'https://apis.google.com'; Referrer-Policy 'origin-when-cross-origin';object-src 'none';img-src 'self' 'https:' 'data:';media-src 'self';frame-src 'https://www.google.co.uk/maps/';font-src 'self' 'https://www.w3.org/';connect-src 'self';style-src 'self' 'https://fonts.googleapis.com/';");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.status(422).send({ error: err.message });
-  console.log(err, req, res);
-});
 
 //Set Port
 var port = 3000;

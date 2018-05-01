@@ -1,80 +1,103 @@
 doctype html
 //if lt IE 7
+ html.no-js.lt-ie9.lt-ie8.lt-ie7(lang='')  
 //if IE 7
+ html.no-js.lt-ie9.lt-ie8(lang='')  
 //if IE 8
+ html.no-js.lt-ie9(lang='')  
 // [if gt IE 8] <!
-// <![endif]
-head
+html.no-js(lang='en')
+ // <![endif]
+ head
   meta(charset='utf-8')
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='description' content='')
-  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='description', content='')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
   title View Recruits
-  link(rel='stylesheet' type="text/css" href='./resources/styles/bootstrap.css')
-  link(rel='stylesheet' type="text/css" href='./resources/styles/plugins.css')
-  link(rel='stylesheet' type="text/css" href='./resources/styles/lato-webfont.css')
-  link(rel='stylesheet' type="text/css" href='./resources/styles/magnific-popup.css')
-  link(rel='stylesheet' type="text/css" href='./resources/styles/style.css')
-  link(rel='stylesheet' type="text/css" href='./resources/styles/responsive.css')
-//if lt IE 8
-  p.browserupgrade
+  link(type='text/css', rel='stylesheet', href='https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/dataTables.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/bootstrap.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/plugins.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/lato-webfont.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/magnific-popup.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/style.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/responsive.css')
+ body
+  //if lt IE 8
+   p.browserupgrade
     | You are using an 
     strong outdated
     |  browser. Please 
     a(href='http://browsehappy.com/') upgrade your browser
     |  to improve your experience.
-.preloader
-  .loaded &nbsp;
-nav.navbar.navbar-default.navbar-fixed-top
-  .container
+  .preloader
+   .loaded  
+  nav.navbar.navbar-default.navbar-fixed-top
+   .container
     // Brand and toggle get grouped for better mobile display
     .navbar-header
-      button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(href='#')
-        img(src='./resources/images/sNinjaNav.png' alt='')
+     button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+     a.navbar-brand(href='#')
+      img(src='./resources/images/sNinjaNav.png', alt='')
     // Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      ul.nav.navbar-nav.navbar-right
-        li
-          a(href='index.html') Home
-        li
-          a(href='viewShifts.html') View Shifts
-        li.active
-          a(href='viewRecruits.html') View Recruits
-        li
-          a(href='addShift.html') Shift Creator
-        li
-          a(href='addRecruit.html') Add Recruit
+     ul.nav.navbar-nav.navbar-right
+      li
+       a(href='/shiftninja/') Home
+      li
+       a(href='/shiftninja/viewShifts') View Shifts
+      li
+       a(href='/shiftninja/recruits') View Recruits
+      li
+       a(href='/shiftninja/addShift') Shift Creator
+      li
+       a(href='/shiftninja/addRecruit') Add Recruit
     // /.navbar-collapse
-  // /.container-fluid
-// Home page style
-header#home.home
-  .container
+   // /.container-fluid
+  // Home page style
+  header#home.home
+   .container
     .row
-      .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
-        .home-content.sections
-          h1
-            span Recruit Details
-          div
-            p
-section.dataView-area
-  #dataView
-// Footer
-footer#footer.footer.colorsbg
-  .container
+     .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
+      .home-content.sections
+       h1
+        span Recruits Details
+       div
+        p
+       h2 Edit or Delete Recruit 
+  section.dataView-area
+   #dataView
+    table#recruitDetails.display(cellspacing='0', width='98%')
+     thead
+      tr
+       th Reference
+       th Title...
+       th First Name...
+       th Surname...
+       th Address...
+       th Contact Number...
+       th Active Recruit...
+  // Footer
+  footer#footer.footer.colorsbg
+   .container
     .row
-      .col-md-6.col-sm-6.col-xs-12
-        .copyright.text-left
-          p
-            | Created by: Jerome Hurley | Powered by:
-            i.fa.fa-coffee
-script(src='./resources/js/vendor/jquery.js')
-script(src='./resources/js/vendor/bootstrap.js')
-script(src='./resources/js/jquery.magnific-popup.js')
-script(src='./resources/js/vendor/modernizr.js')
-script(src='./resources/js/plugins.js')
-script(src='./resources/js/main.js')
+     .col-md-6.col-sm-6.col-xs-12
+      .copyright.text-left
+       p
+        | Created by: Jerome Hurley | Powered by:
+        i.fa.fa-coffee  
+  script(src='./resources/js/vendor/jquery.js')  
+  script(src='./resources/js/redirectController.js')
+  script(src='https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.js')
+  script(src='https://cdn.datatables.net/select/1.2.5/js/dataTables.select.js')
+  script(src='./resources/js/vendor/jquery.dataTables.js')
+  script(src='./resources/js/datatableController.js')
+  script(src='./resources/js/vendor/bootstrap.js')
+  script(src='./resources/js/jquery.magnific-popup.js')
+  script(src='./resources/js/vendor/modernizr.js')
+  script(src='./resources/js/plugins.js')
+  script(src='./resources/js/main.js')
