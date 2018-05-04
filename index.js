@@ -5,6 +5,7 @@ const mong = require('mongoose');
 var config = require('./config');
 const expressApp = express();
 const Recruit = require('./models/recruitsModel');
+const Admins = require('./models/adminsModel')
 const path = require('path');
 var referrerPolicy = require('referrer-policy');
 var cors = require('cors');
@@ -130,6 +131,19 @@ if (useEnv != 'deploy') {
         })
       };
       Recruit.create(data, function (err) { console.log(err) });
+    }
+  });
+  Admins.find({}, function (err, adminsInDB) {
+    if (!adminsInDB.length) {
+      var data = []
+      data.push({
+        adminID: "YOUR OWN DATA HERE",
+        adminUsername: "YOUR OWN DATA HERE",
+        adminFName: "YOUR OWN DATA HERE",
+        adminSName: "YOUR OWN DATA HERE",
+        adminPassword: "YOUR OWN DATA HERE"
+      })
+      Admins.create(data, function (err) { console.log(err) });
     }
   });
 };

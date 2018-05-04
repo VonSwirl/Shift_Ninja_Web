@@ -32,7 +32,7 @@ const recruitsSchema = new Schema({
     recAddress: {type: String},
     recMobile:{type: Number},
     allQuals: [qualificationsSchema],
-    recActive: { type: Boolean, default: false },
+    recActive: { type: Boolean, default: true },
     recExperience: { type: String },
     recProfilePic: {  data: Buffer, contentType: String },
     allShifts: [shiftEventsSchema]
