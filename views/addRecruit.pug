@@ -65,28 +65,29 @@ html.no-js(lang='en')
      .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
       .home-content.sections
        h1
-        span Recruits Details
+        span Add New Recruit
        div
         p
-       h2 Edit or Delete Recruit 
   section.dataView-area
    #dataView
-    table#recruitDetails.display(cellspacing='0', width='98%')
-     thead
-      tr
-       th ID   
-       th Ref
-       th Title
-       th First Name
-       th Surname
-       th Fore Name
-       th Address
-       th Contact Number
-       th Quals
-       th Active Recruit
-       th Experience
-       th Profile Pic
-       th Shifts
+    form(method='POST', action='/users/register')
+    #form-group
+      label Name:
+      input.form-control(name='name', type='text')
+    #form-group
+      label Email:
+      input.form-control(name='email', type='text')
+    #form-group
+      label Username:
+      input.form-control(name='username',type='text')
+    #form-group
+      label Password:
+      input.form-control(name='password',type='password')
+    #form-group
+      label Confirm:
+      input.form-control(name='password2',type='password')
+    br
+    input.btn.btn-primary(type='submit',value='Submit')
   // Footer
   footer#footer.footer.colorsbg
    .container
@@ -98,10 +99,7 @@ html.no-js(lang='en')
         i.fa.fa-coffee  
   script(src='./resources/js/vendor/jquery.js')  
   script(src='./resources/js/redirectController.js')
-  script(src='https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.js')
-  script(src='https://cdn.datatables.net/select/1.2.5/js/dataTables.select.js')
   script(src='./resources/js/vendor/jquery.dataTables.js')
-  script(src='./resources/js/detailsController.js')
   script(src='./resources/js/vendor/bootstrap.js')
   script(src='./resources/js/jquery.magnific-popup.js')
   script(src='./resources/js/vendor/modernizr.js')

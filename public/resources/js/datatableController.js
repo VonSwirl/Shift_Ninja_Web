@@ -1,8 +1,44 @@
 /* Formatting function for row details - modify as you need */
 function format(d) {
-    return '<table >' + '</table>';
-}
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
 
+        '<tr>' +
+        '<td> ID: </td>' +
+        '<td>' + d.recID + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td> Recruit Reference: </td>' +
+        '<td>' + d.recRecruitRef + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td> Title: </td>' +
+        '<td>' + d.recTitle + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td> Qualifications: </td>' +
+        '<td>' + d.allQuals + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td> Active Status: </td>' +
+        '<td>' + d.recActive + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td> Experience: </td>' +
+        '<td>' + d.recExperience + '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td> Shifts Worked: </td>' +
+        '<td>' + d.allShifts + '</td>' +
+        '</tr>' +
+        '</table>';
+}
+var recSelected = null;
 $(document).ready(function () {
     //Table gets populated via the rOut post function in recruits.js
     var table = $('#viewRecruitTable').DataTable({
@@ -15,17 +51,18 @@ $(document).ready(function () {
             'className': 'details-control', 'orderable': false,
             'data': null, 'defaultContent': ''
         },
-        { 'data': 'recID' }, { 'data': 'recTitle' }, { 'data': 'recFirstN' },
-        { 'data': 'recSurN' }, { 'data': 'recAddress' },
-        { 'data': 'recMobile' }, { 'data': 'recActive' }
-        ],
-        'order': [[1, 'asc']],
+        { 'data': 'recFirstN' },
+        { 'data': 'recSurN' },
+        { 'data': 'recForeN' },
+        { 'data': 'recAddress' },
+        { 'data': 'recMobile' }],
+        'order': [[1, 'asc']],    
     });
     // When "eye" image is clicked on a specific row the user is forwarded to view recruit page
     $('#viewRecruitTable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
-        const recSelected = row.data().recRecruitRef;
+        recSelected = row.data().recRecruitRef;
 
         if (row.child.isShown()) {
             // Change "eye" back to green
@@ -33,55 +70,13 @@ $(document).ready(function () {
             tr.removeClass('shown');
 
         } else {
-            row.child(format()).show();
+            row.child(format(row.data())).show();
             tr.addClass('shown');
-            if (recSelected != null) {
-                $.redirect("/shiftninja/recruitdetails", { recRef: recSelected });
-
-                // $.redirect("viewRecruitDetails/" );
-                //window.location.replace("http://stackoverflow.com");
-                //window.location.href = "/shiftninja/recruitdetails";
-                //window.location.replace('/shiftninja/recruitdetails');
-
-                /* $.post('/shiftninja/recruitdetails', { ref: recSelected }, function () {
-                    window.location = '/shiftninja/recruitdetails/' + recSelected;
-                });
-                return false; */
-
-                /*  $.ajax(
-                     {
-                         type: 'get',
-                         url: '/shiftninja/recruitdetails/'+recSelected,
-                         data: {
-                             "ref": recSelected
-                         },
-                         success: function (response) {
-                             console.log("SUCCESS");
-                             window.location = '/shiftninja/recruitdetails/'+recSelected;
-                         },
-                         error: function () {
-                             alert("rec: " + recSelected + "     type " + typeof (recSelected));
-                         }
-                     }
-                 ); */
-
-            }
+            /*     if (recSelected != null) {
+                    $.redirect("/shiftninja/recruitdetails", { recRef: recSelected });
+                } */
         }
     });
 });
 
-$(document).ready(function () {
-    //Table gets populated via the rOut post function in recruits.js
-    var table = $('#recruitDetails').DataTable({
-        ajax: {
-            url: '/shiftninja/viewRecruitDetails/',
-            type: 'POST',
-            dataType: 'json'
-        },
-        columns: [
-            { 'data': 'recRecruitRef' }, { 'data': 'recTitle' }, { 'data': 'recFirstN' },
-            { 'data': 'recSurN' }, { 'data': 'recAddress' },
-            { 'data': 'recMobile' }, { 'data': 'recActive' }
-        ]
-    });
-}); 
+

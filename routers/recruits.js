@@ -21,11 +21,20 @@ const Recruit = require('../models/recruitsModel.js');
 const moment = require('moment');
 
 /**
- * TODO
+ * Loads the Home page when app is run
  */
 rOut.get('/', function (req, res) {
     res.render('index.pug');
 });
+
+/**
+ * Renders the addRecruit.pug page to the client-side
+ */
+rOut.get('/addRecruit', function (req, res) {
+    res.render('addRecruit.pug');
+});
+
+rOut.post
 
 /**
  * TODO
@@ -62,61 +71,8 @@ rOut.post('/populateViewRecruitsDatatable', function (req, res, next) {
     });
 });
 
-/**
- * TODO
- */
-rOut.post('/recruitdetails', function (req, res, next) {
-    console.log(req.body.recRef);
-    Recruit.findOne({ RecruitRef: req.body.recRef }).then(function (recruitFound) {
-        console.log(recruitFound);
-
-        //res.render('recruitDetails.pug', { Recruit: Recruit });
-        res.render('recruitDetails.pug');
-    }).catch(next);
-});
-
-/**
- * TODO
- */
-/* rOut.post('/viewRecruitDetails/:recRef', function (req, res, next) {
-    Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
-        console.log('11111111111111111111111111111111');
-        res.render('recruitDetails.pug', { Recruit: Recruit });
-    }).catch(next);
-}); */
-
-/**
- * TODO
- */
-rOut.put('/PurchasingUpdate/', function (req, res, next) {
-    validateRecruit.purchasingServUpdateHandler(req).then(function (messageResponse) {
-        res.send(messageResponse);
-
-    }).catch(next);
-});
-
-/**
- * TODO
- */
-rOut.get('/displayRecruits/:custoRef', function (req, res, next) {
-    Recruits.find({ custoRef: req.params.custoRef }).then(function (Recruit) {
-        res.render('viewRecruit', { RecruitList: Recruit });
-    }).catch(next);
-});
-
 rOut.get('/test', function (req, res, next) {
     res.send("Get happy");
-});
-
-/**
- * TODO
- */
-rOut.put('/CustomerApprovalUpdate', function (req, res, next) {
-    forwardingService.customerAuthUpdate(req.param.id, req.query.approved)
-        .then(function (messageResponse) {
-            res.send(messageResponse);
-
-        }).catch(next);
 });
 
 //Delete available for future use, not required at this stage.
