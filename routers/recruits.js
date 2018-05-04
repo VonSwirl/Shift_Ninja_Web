@@ -1,57 +1,71 @@
 //Constraints below are dependencies required by this routing file.
 const express = require('express');
+const mongoose = require('mongoose');
 const rOut = express.Router();
 const validateRecruit = require('../controllers/validateDataController.js');
 const forwardingService = require('../controllers/recruitsForwardingController.js');
 
+//Helps to locate the correct path of files
+var path = require('path');
+
 //Retrieves values from JSON objects for data binding. 
-//Offers params, nested queries, deep queries, custom reduce/filter functions and simple boolean logic.
-var jsonQuery = require('json-query')
+var bodyParser = require('body-parser');
 
 //Allows access to our Recruit Data Model
-const Recruits = require('../models/recruitsModel.js');
+const Recruit = require('../models/recruitsModel.js');
 
 //Allows Parsing, validating, manipulation, and to display dates and times in JS.
 const moment = require('moment');
 
 /**
- * 
+ * TODO
  */
-rOut.post('/newRecruit', function (req, res, next) {
-    validateRecruit.isRecruitUnique(req).then(function (recruitValid) {
-
-        if (recruitValid) {
-            var recruitBody = req.body;
-            
-            res.render('viewRecruit', {val: recruitBody});
-        }
-    }).catch(next);
+rOut.get('/', function (req, res) {
+    res.sendFile(path.resolve('./views/login.html'));
 });
 
-//TODO
-//Get a single item to be able to edit prices
-rOut.get('/viewRecruitByID/:recID', function (req, res, next) {
-    var count = 0;
-    //Get their current id and compare to check who they are then call another function
-    //console.log(req.params.ean);
-    Recruits.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
-        var productsList = [];
-        var count = 0;
-        Recruit.products.forEach(() => {
-            productsList.push(Recruit.products[count]);
-            count++;
-        }, this);
-        console.log(count, productsList);
-        res.render('viewProductsInRecruit', { productsList });
+/**
+ * TODO
+ */
+rOut.post('/login', function (req, res) {
+    var user_name = req.body.user;
+    var password = req.body.password;
+    console.log("User name = " + user_name + ", password is " + password);
+    res.end("yes");
+});
+
+/**
+ * TODO
+ */
+rOut.post('/viewAllRecruits', function (req, res, next) {
+    Recruit.dataTables({
+        limit: req.body.length,
+        skip: req.body.start,
+        order: req.body.order,
+        columns: req.body.columns
+    }).then(function (table) {
+        res.json({
+            data: table.data,
+            recordsFiltered: table.total,
+            recordsTotal: table.total
+        });
+
+    });
+});
+
+/**
+ * TODO
+ */
+rOut.post('/viewRecruitDetails/:recID', function (req, res, next) {
+    Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
+        console.log(Recruit);
+        res.render('recruitDetails', { Recruit });
     }).catch(next);
 });
 
 /**
- * 
- * This post recieves and update for a products availablity. It queries the document for 
- * sub-documents with a matching EAN. If fount this sub doc value nowAvailable is set to true.
+ * TODO
  */
-//TODO
 rOut.put('/PurchasingUpdate/', function (req, res, next) {
     validateRecruit.purchasingServUpdateHandler(req).then(function (messageResponse) {
         res.send(messageResponse);
@@ -60,19 +74,20 @@ rOut.put('/PurchasingUpdate/', function (req, res, next) {
 });
 
 /**
- * This returns a view for the staff to see all of a customers Recruits 
+ * TODO
  */
-//TODO
 rOut.get('/displayRecruits/:custoRef', function (req, res, next) {
     Recruits.find({ custoRef: req.params.custoRef }).then(function (Recruit) {
         res.render('viewRecruit', { RecruitList: Recruit });
     }).catch(next);
 });
 
+rOut.get('/test', function (req, res, next) {
+    res.send("Get happy");
+});
+
 /**
- * This put request receives a update from processing service. The request
- * should contain a customer reference number and also a boolean value.
- * The boolean value sets the customers purchase approvale to true or false
+ * TODO
  */
 rOut.put('/CustomerApprovalUpdate', function (req, res, next) {
     forwardingService.customerAuthUpdate(req.param.id, req.query.approved)

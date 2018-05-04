@@ -2,28 +2,39 @@
 var config = require('../config');
 var req = require('request');
 
+
 /**
  * @description This function sends a post request to the purchasing service with all the 
  * missing items from the order that need to be stock to satify the order before it can be forwared
  * to invoicing service
  * @param {JSON} missingOrder This data is a nested map of products that require ordering 
  */
-function sendOrderToPurchasingService(missingOrder) {
-    console.log(missingOrder);
+function redirectToViewRecruitPage(recievedRecID) {
+    const Recruit = require('../models/recruitsModel.js');
+    console.log(recievedRecID);
     try {
-        req.post({
-            url: config.purchaseMissingStockURL,
-            body: missingOrder,
-            json: true
+        Recruit.find({ recID: recievedRecID }).then(function (err, found) {
+            //res.render('viewRecruit', { aRecruit: found});
+            console.log(found);
+        });
 
-        }, function (err, res, body) {
-            if (err) {
-                console.log('There was an error', err);
-            }
-        })
     } catch (err) {
-        console.log('error connecting to purchasing service', err);
+        console.log('Error trying to locate recruit. ID received was ' + recievedRecID, err);
     }
+    /*  try {
+         req.post({
+             url: config.purchaseMissingStockURL,
+             body: missingOrder,
+             json: true
+ 
+         }, function (err, res, body) {
+             if (err) {
+                 console.log('There was an error', err);
+             }
+         })
+     } catch (err) {
+         console.log('error connecting to purchasing service', err);
+     } */
 }
 
 /**
@@ -77,7 +88,7 @@ function customerAuthUpdate(cID, approved) {
 }
 
 module.exports = {
-    sendOrderToPurchasingService,
+    redirectToViewRecruitPage,
     customerAuthUpdate,
     sendOrderToInvoicing
 };

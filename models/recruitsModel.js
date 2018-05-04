@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const dataTables = require('mongoose-datatables');
 //Creates a separate schema that allows the shift events to be stored as an array of object
 const shiftEventsSchema = new Schema({
     shiftID: { type: Number },
@@ -24,13 +24,13 @@ const qualificationsSchema = new Schema({
 //Create Recruits domain model and schema
 const recruitsSchema = new Schema({
     recID: { type: Number },
-    //TODO: is this required?
     recRecruitRef: { type: String },
-    //
     recTitle: { type: String },
     recFirstN: { type: String },
     recSurN: { type: String },
     recForeN: { type: String },
+    recAddress: {type: String},
+    recMobile:{type: Number},
     allQuals: [qualificationsSchema],
     recActive: { type: Boolean, default: false },
     recExperience: { type: String },
@@ -38,9 +38,11 @@ const recruitsSchema = new Schema({
     allShifts: [shiftEventsSchema]
 });
 
-const Recruits = mongoose.model('recruitsModel', recruitsSchema);
+recruitsSchema.plugin(dataTables);
+
+var Recruit = mongoose.model('recruitsModel', recruitsSchema);
 
 //This exports the model.
-module.exports = Recruits;
+module.exports = Recruit;
 
 

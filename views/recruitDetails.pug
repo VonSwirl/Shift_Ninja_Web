@@ -1,0 +1,80 @@
+doctype html
+//if lt IE 7
+//if IE 7
+//if IE 8
+// [if gt IE 8] <!
+// <![endif]
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='description' content='')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title View Recruits
+  link(rel='stylesheet' href='./resources/styles/bootstrap.min.css')
+  link(rel='stylesheet' href='./resources/styles/plugins.min.css')
+  link(rel='stylesheet' href='./resources/styles/lato-webfont.min.css')
+  link(rel='stylesheet' href='./resources/styles/magnific-popup.min.css')
+  link(rel='stylesheet' href='./resources/styles/style.min.css')
+  link(rel='stylesheet' href='./resources/styles/responsive.min.css')
+//if lt IE 8
+  p.browserupgrade
+    | You are using an 
+    strong outdated
+    |  browser. Please 
+    a(href='http://browsehappy.com/') upgrade your browser
+    |  to improve your experience.
+.preloader
+  .loaded &nbsp;
+nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    // Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='#')
+        img(src='./resources/images/sNinjaNav.png' alt='')
+    // Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='index.html') Home
+        li
+          a(href='viewShifts.html') View Shifts
+        li.active
+          a(href='viewRecruits.html') View Recruits
+        li
+          a(href='addShift.html') Shift Creator
+        li
+          a(href='addRecruit.html') Add Recruit
+    // /.navbar-collapse
+  // /.container-fluid
+// Home page style
+header#home.home
+  .container
+    .row
+      .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
+        .home-content.sections
+          h1
+            span Recruit Details
+          div
+            p
+section.dataView-area
+  #dataView
+// Footer
+footer#footer.footer.colorsbg
+  .container
+    .row
+      .col-md-6.col-sm-6.col-xs-12
+        .copyright.text-left
+          p
+            | Created by: Jerome Hurley | Powered by:
+            i.fa.fa-coffee
+script(src='./resources/js/vendor/jquery.min.js')
+script(src='./resources/js/vendor/bootstrap.min.js')
+script(src='./resources/js/jquery.magnific-popup.js')
+script(src='./resources/js/vendor/modernizr.min.js')
+script(src='./resources/js/plugins.js')
+script(src='./resources/js/main.js')

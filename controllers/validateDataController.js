@@ -17,28 +17,32 @@ function isRecruitUnique(newRecruitData) {
 
         if (validRef != null) {
             newRecruitData.body.recID = validRef;
-
+            
             //This section creates a unique Recruit ID base on inputted data.
             var partTwo = moment().format('DDMMYYhm');
             var unique = validRef + partTwo;
-
-            //Checks if there is already a Recruit with this same reference number.
+            
+            //Checks if there is already a Recruit with this same reference number.      
             Recruit.count({ recID: unique }, function (err, count) {
-
+                if (err) {
+                    console.log('Error Inserting New Data');
+                    if (err.name == 'ValidationError') {
+                        for (field in err.errors) {
+                            console.log(err.errors[field].message);
+                        }
+                    }
+                }
+    
                 if (count > 0) {
                     //Scans for a matching recID in db.
                     reject('Recruit ID Already In Use. Please try again');
-
                 } else {
-                    //newRecruitData.body.recAddedDate = moment().format('llll');
-                    //newRecruitData.body.recID = unique;
                     saveNewRecruitToMongo(newRecruitData);
-                    resolve(true);
+                    resolve(true); 
                 }
 
             }).catch(function (err) {
                 reject('There is a problem trying to count Recruits by recID.', err);
-
             })
         } else {
             resolve('No recID provided. Please ensure you have provided the correct recID');
@@ -56,7 +60,7 @@ function checkIfProductsStocked(recruitsData) {
     try {
         var missingStock = { recID: recruitsData.body.RecruitRef, itemsRequired: [] };
         var totalValue = 0.0;
-  
+
         newRecruitForwarding(recruitsData
             //, missingStock
         );
@@ -79,7 +83,7 @@ function checkIfProductsStocked(recruitsData) {
 function newRecruitForwarding(recruitD, mS) {
     if (mS.itemsRequired.length == []) {
         recruitD.body.stocked = true;
-       recruitD.body.RecruitStatus = "Complete";
+        recruitD.body.RecruitStatus = "Complete";
         saveNewRecruitToMongo(recruitD);
         forwardingService.sendRecruitToInvoicing(recruitD);
 
@@ -103,6 +107,7 @@ function saveNewRecruitToMongo(RecruitD) {
         //If there is no existing Recruit with reference matching then 
         //the Recruit is created
         Recruit.create(RecruitD.body);
+
         console.log('New Recruit saved to db', RecruitD.body);
 
     } catch (error) {
