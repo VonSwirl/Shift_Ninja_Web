@@ -7,46 +7,41 @@ const forwardingService = require('../controllers/recruitsForwardingController.j
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const expressValidator = require('express-validator');
-const flash = require("connect-flash");
-const session = require('express-session');
 
-// Express Session Middleware
-//rOut.use(session());
-//rOut.use(flash());
+//Allows access to our Recruit Data Model
+const Recruit = require('../models/recruitsModel');
+const Admin = require('../models/adminsModel');
 
 //Retrieves values from JSON objects for data binding. 
 rOut.use(bodyParser.json());
 rOut.use(bodyParser.urlencoded({ extended: true }));
 rOut.use(express.static('public'));
-rOut.use(expressValidator());
-
 
 //Helps to locate the correct path of files
 var path = require('path');
-
-//Allows access to our Recruit Data Model
-const Recruit = require('../models/recruitsModel.js');
 
 //Allows Parsing, validating, manipulation, and to display dates and times in JS.
 const moment = require('moment');
 
 /**
- * Loads the Home page when app is run
+ * Loads the Home page when logged in
  */
 rOut.get('/', function (req, res) {
     res.render('index.pug');
 });
 
+/**
+ * Loads the Login page when app runs
+ */
 rOut.get('/login', function (req, res) {
+    req.flash('success', 'You are now registered and can log in');
     res.render('login');
 });
 
-rOut.post('/loginData', function (req, res) {
+rOut.post('/loginData', function (req, res, next) {
     passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/users/login',
-        failureFlash: true
+        successRedirect: '/shiftninja',
+        failureRedirect: '/shiftninja/login'
     })(req, res, next);
 });
 
@@ -139,17 +134,6 @@ rOut.post('/newRecData', function (req, res) {
         res.redirect('/addRecruit');
         errors: errors
     }
-
-});
-
-/**
- * TODO
- */
-rOut.post('/login', function (req, res) {
-    var user_name = req.body.user;
-    var password = req.body.password;
-    console.log("User name = " + user_name + ", password is " + password);
-    res.end("yes");
 });
 
 /**
