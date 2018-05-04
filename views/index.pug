@@ -1,0 +1,279 @@
+doctype html
+//if lt IE 7
+	html.no-js.lt-ie9.lt-ie8.lt-ie7(lang='')  
+//if IE 7
+	html.no-js.lt-ie9.lt-ie8(lang='')  
+//if IE 8
+	html.no-js.lt-ie9(lang='')  
+// [if gt IE 8] <!
+html.no-js(lang='en')
+	// <![endif]
+	head
+		script(src='./resources/js/vendor/modernizr.js')
+		title Home Page
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+		meta(name='description', content='')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='./resources/styles/bootstrap.css')
+		link(rel='stylesheet', href='./resources/styles/plugins.css')
+		link(rel='stylesheet', href='./resources/styles/lato-webfont.css')
+		link(rel='stylesheet', href='./resources/styles/magnific-popup.css')
+		link(rel='stylesheet', href='./resources/styles/style.css')
+		link(rel='stylesheet', href='./resources/styles/responsive.css')
+	body
+		//if lt IE 8
+			p.browserupgrade
+				| You are using an 
+				strong outdated
+				|  browser. Please 
+				a(href='http://browsehappy.com/') upgrade your browser
+				|  to improve your experience.
+		.preloader
+			.loaded  
+		nav.navbar.navbar-default.navbar-fixed-top
+			.container
+				// Brand and toggle get grouped for better mobile display
+				.navbar-header
+					button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='#')
+						img(src='./resources/images/sNinjaNav.png', alt='')
+				// Collect the nav links, forms, and other content for toggling
+				#bs-example-navbar-collapse-1.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li.active
+							a(href='#') Home
+						li
+							a(href='/shiftninja/viewShifts') View Shifts
+						li
+							a(href='/shiftninja/recruits') View Recruits
+						li
+							a(href='/shiftninja/addShift') Shift Creator
+						li
+							a(href='/shiftninja/addRecruit') Add Recruit
+				// /.navbar-collapse
+			// /.container-fluid
+		// Home page style
+		header#home.home
+			.container
+				.row
+					.col-md-6.col-md-offset-6.col-sm-12.col-xs-12
+						.home-content.sections
+							h1
+								span Shift Ninja (Prototype)
+							div
+								p
+							h2 Agency Management
+							h2
+								| made
+								span Simple
+							div
+								br
+								br
+							a(target='_blank', href='https://github.com/VonSwirl/Shift_Ninja_Mobile')
+								button.btn.btn-primary.btn-lg MobileApp Repo
+							a(target='_blank', href='https://github.com/VonSwirl/Shift_Ninja_Web')
+								button.btn.btn-primary.btn-lg WebApp Repo
+							.available
+								p
+									| Developer :
+									a(href='https://www.linkedin.com/in/jerome-hurley-uk')
+										i.fa.fa-linkedin
+									a(href='https://github.com/vonswirl')
+										i.fa.fa-github
+		// Sections
+		section#features.sections.lightbg
+			// Container
+			.container.text-center
+				.heading-content
+					h3 About Shift Ninja
+					h5
+						| Shift Ninja aims to be a cross-platform mobile and web application (app). The overall concept of the app
+						| is to deliver a multifaceted system aimed at optimising the way in which Recruitment Agencies manage
+						| and distribute their available work vacancies.
+					h5
+						| A user friendly mobile app will enable agency recruits to view all work vacancies available to them. User’s
+						| e.g. the recruits will be able to bid or decline work opportunities through the mobile app. When recruitment
+						| staff receive a user’s bid request via the web app they will have the option to action it appropriately.
+					h5
+						| The mobile app will also have a calendar feature where they can set which days of the month they are available
+						| for work. This data will be shared with the recruitment agency.
+					h5
+						| Another important aspect of the mobile app is to provide users the ability to register their attendance at
+						| a work place by incorporating devices Near Field Communication (NFC) capabilities. This feature will
+						| work hand in hand with other key features to be discussed later in the proposal.
+			// /Container
+		// /Sections
+		// Sections
+		section#tech.sections.lightbg
+			.container.text-center
+				.heading-content
+					h3 Technologies Utilised by Shift Ninja
+				// row of columns
+				.row
+					.col-md-8.col-md-offset-2.col-sm-12.col-xs-12
+						#carousel-example-generic.carousel.slide(data-ride='carousel', data-interval='false')
+							// Indicators
+							ol.carousel-indicators
+								li.active(data-target='#carousel-example-generic', data-slide-to='0')
+								li(data-target='#carousel-example-generic', data-slide-to='1')
+								li(data-target='#carousel-example-generic', data-slide-to='2')
+								li(data-target='#carousel-example-generic', data-slide-to='3')
+								li(data-target='#carousel-example-generic', data-slide-to='4')
+								li(data-target='#carousel-example-generic', data-slide-to='5')
+								li(data-target='#carousel-example-generic', data-slide-to='6')
+								li(data-target='#carousel-example-generic', data-slide-to='7')
+								li(data-target='#carousel-example-generic', data-slide-to='8')
+							// Wrapper for slides
+							.carousel-inner(role='listbox')
+								.item.active
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/1.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 MEAN Stack: 
+													|                                                 MEAN is a collection of JavaScript-based technologies — MongoDB, Express.js, AngularJS, and Node.js — used to develop web
+													|                                                 applications. From the client and server sides to databases, MEAN is a full-stack
+													|                                                 development toolkit. Play through the following five courses to become a
+													|                                                 MEAN stack developer and earn a new badge!
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/2.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 MongoDB: 
+													|                                                 MongoDB is the leading NoSQL database, empowering businesses to be more agile and scalable.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/3.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 ExpressJS: 
+													|                                                 Express is a minimal and flexible node.js web application framework, providing a robust set of features for building single
+													|                                                 and multi-page, and hybrid web applications.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/4.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 AngularJS: 
+													|                                                 AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive,
+													|                                                 readable, and quick to develop.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/5.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 NodeJS: 
+													|                                                 Node.js is a platform built on Chrome’s JavaScript runtime for easily building fast, scalable network applications.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/6.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 Xamarin: 
+													|                                                 Learning a new language, the APIs, and other stuff may seem a tedious task and it can make you stick to your platform. Xamarin
+													|                                                 can help you build cross-platform mobile applications that can perform almost
+													|                                                 similar to the platform native applications.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/7.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 GitHub: 
+													|                                                 GitHub brings together the world's largest community of developers to discover, share, and build better software. From open
+													|                                                 source projects to private team repositories, we're your all-in-one platform
+													|                                                 for collaborative development.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/8.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 Visual Studio: 
+													|                                                 Visual Studio offers a suite of tools that enable you to easily create cloud-enabled applications powered by Microsoft Azure.
+													|                                                 You can configure, build, debug, package, and deploy applications and services
+													|                                                 on Microsoft Azure directly from the IDE.
+								.item
+									.col-md-4
+										.tech-photo
+											img(src='./resources/images/gallery/9.png', alt='')
+									.col-md-8
+										.tech-content
+											p
+												strong
+													h3 Visual Studio Code: 
+													|                                                 Visual Studio Code is free, cross platform, super fast and lightweight code editor developed by Microsoft for Windows, Linux
+													|                                                 and OS X. Since a lot of developers use windows as their development environment,
+													|                                                 but there are also lots of developers using Linux and Mac. So, Visual studio
+													|                                                 code is for them.
+			// /container
+		// /Sections
+		// Sections
+		section#contact
+			#map
+			// container
+			.container.text-center
+				// Example row of columns
+				.row
+					.col-md-4.col-md-offset-4.col-sm-12.col-xs-12
+						.contact-form-area
+							form
+								h3 Contact
+								.form-group
+									input.form-control(type='text', placeholder='Your Name')
+								.form-group
+									input.form-control(type='email', placeholder='Your Email')
+								.form-group
+									input.form-control(type='text', placeholder='Your Subject')
+								.form-group
+									textarea.form-control(rows='7', placeholder='Message')
+								button.btn.btn-primary.contact-btn(type='submit') SEND
+			// /container
+		// /section
+		.scroll-top
+			.scrollup
+				i.fa.fa-angle-double-up
+		// Footer
+		footer#footer.footer.colorsbg
+			.container
+				.row
+					.col-md-6.col-sm-6.col-xs-12
+						.copyright.text-left
+							p
+								| Created by: Jerome Hurley | Powered by:
+								i.fa.fa-coffee 												
+		script(src='./resources/js/vendor/jquery.js')
+		script(src='./resources/js/vendor/bootstrap.js')
+		script(src='http://maps.google.com/maps/api/js')
+		script(src='./resources/js/gmaps.js')
+		script(src='./resources/js/jquery.magnific-popup.js')
+		script(src='./resources/js/plugins.js')
+		script(src='./resources/js/main.js')

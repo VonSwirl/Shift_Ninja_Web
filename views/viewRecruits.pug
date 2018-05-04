@@ -50,8 +50,8 @@ html.no-js(lang='en')
        a(href='/shiftninja/') Home
       li
        a(href='/shiftninja/viewShifts') View Shifts
-      li
-       a(href='/shiftninja/recruits') View Recruits
+      li.active
+       a(href='#') View Recruits
       li
        a(href='/shiftninja/addShift') Shift Creator
       li
@@ -65,16 +65,18 @@ html.no-js(lang='en')
      .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
       .home-content.sections
        h1
-        span Recruits Details
+        span View Recruits
        div
         p
-       h2 Edit or Delete Recruit 
+       h2 Looking for Someone?
+       h2 Well your in the right place!
   section.dataView-area
    #dataView
-    table#recruitDetails.display(cellspacing='0', width='98%')
+    table#viewRecruitTable.display(cellspacing='0', width='98%')
      thead
       tr
-       th Reference
+       th View Details
+       th Ref
        th Title...
        th First Name...
        th Surname...

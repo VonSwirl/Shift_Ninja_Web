@@ -4,12 +4,15 @@ const mongoose = require('mongoose');
 const rOut = express.Router();
 const validateRecruit = require('../controllers/validateDataController.js');
 const forwardingService = require('../controllers/recruitsForwardingController.js');
+const bodyParser = require('body-parser');
+
+//Retrieves values from JSON objects for data binding. 
+rOut.use(bodyParser.json());
+rOut.use(bodyParser.urlencoded({ extended: true }));
+rOut.use(express.static('public'));
 
 //Helps to locate the correct path of files
 var path = require('path');
-
-//Retrieves values from JSON objects for data binding. 
-var bodyParser = require('body-parser');
 
 //Allows access to our Recruit Data Model
 const Recruit = require('../models/recruitsModel.js');
@@ -21,7 +24,7 @@ const moment = require('moment');
  * TODO
  */
 rOut.get('/', function (req, res) {
-    res.sendFile(path.resolve('./views/login.html'));
+    res.render('index.pug');
 });
 
 /**
@@ -37,7 +40,14 @@ rOut.post('/login', function (req, res) {
 /**
  * TODO
  */
-rOut.post('/viewAllRecruits', function (req, res, next) {
+rOut.get('/recruits', function (req, res) {
+    res.render('viewRecruits.pug');
+});
+
+/**
+ * TODO
+ */
+rOut.post('/populateViewRecruitsDatatable', function (req, res, next) {
     Recruit.dataTables({
         limit: req.body.length,
         skip: req.body.start,
@@ -49,19 +59,31 @@ rOut.post('/viewAllRecruits', function (req, res, next) {
             recordsFiltered: table.total,
             recordsTotal: table.total
         });
-
     });
 });
 
 /**
  * TODO
  */
-rOut.post('/viewRecruitDetails/:recID', function (req, res, next) {
-    Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
-        console.log(Recruit);
-        res.render('recruitDetails', { Recruit });
+rOut.post('/recruitdetails', function (req, res, next) {
+    console.log(req.body.recRef);
+    Recruit.findOne({ RecruitRef: req.body.recRef }).then(function (recruitFound) {
+        console.log(recruitFound);
+
+        //res.render('recruitDetails.pug', { Recruit: Recruit });
+        res.render('recruitDetails.pug');
     }).catch(next);
 });
+
+/**
+ * TODO
+ */
+/* rOut.post('/viewRecruitDetails/:recRef', function (req, res, next) {
+    Recruit.findOne({ RecruitRef: req.params.RecruitRef }).then(function (Recruit) {
+        console.log('11111111111111111111111111111111');
+        res.render('recruitDetails.pug', { Recruit: Recruit });
+    }).catch(next);
+}); */
 
 /**
  * TODO
