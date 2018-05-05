@@ -48,8 +48,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "node .bin/www",
-    "deploy": "deploy"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
