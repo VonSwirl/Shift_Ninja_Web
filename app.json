@@ -1,0 +1,9 @@
+{
+    "name": "Shift Ninja Web",
+    "description": "Web application for FYP",
+    "repository": "https://github.com/VonSwirl/Shift_Ninja_Web",
+    "logo": "./public/resources/images/icon.svg",
+    "keywords": ["node","express","static"],
+    "image": "shiftninja/nodejs"
+
+}
