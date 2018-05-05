@@ -33,6 +33,8 @@ mong.Promise = global.Promise;
 var chooseEnviroment = ['development', 'local', 'deploy', 'test'];
 var useEnv = chooseEnviroment[0];
 process.env.NODE_ENV = useEnv;
+process.env.port = 3000;
+
 
 //Allows Express to use body-parser tool to handle our JSON data.
 //Allows access to jquery, css, fonts, images to views
@@ -198,6 +200,6 @@ if (useEnv != 'deploy') {
 var port = 3000;
 
 //Request Listener
-expressApp.listen(port, function () {
+expressApp.listen(process.env.port || port, function () {
   console.log(">>>> Listening on Port " + port);
 });
