@@ -8,4 +8,4 @@ RUN npm install
 COPY . /app
 CMD node index.js
 # replace this with your application's default port
-EXPOSE 3004
+EXPOSE 3000
