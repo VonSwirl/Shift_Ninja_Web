@@ -49,7 +49,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node .bin/www",
-    "deploy": "deploy"
+    "deploy": "deploy shiftninja"
   },
   "repository": {
     "type": "git",
