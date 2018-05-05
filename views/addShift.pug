@@ -1,0 +1,117 @@
+doctype html
+//if lt IE 7
+ html.no-js.lt-ie9.lt-ie8.lt-ie7(lang='')  
+//if IE 7
+ html.no-js.lt-ie9.lt-ie8(lang='')  
+//if IE 8
+ html.no-js.lt-ie9(lang='')  
+// [if gt IE 8] <!
+html.no-js(lang='en')
+ // <![endif]
+ head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='description', content='')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  title View Recruits
+  link(type='text/css', rel='stylesheet', href='https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/dataTables.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/bootstrap.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/plugins.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/lato-webfont.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/magnific-popup.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/style.css')
+  link(type='text/css', rel='stylesheet', href='./resources/styles/responsive.css')
+ body
+  //if lt IE 8
+   p.browserupgrade
+    | You are using an 
+    strong outdated
+    |  browser. Please 
+    a(href='http://browsehappy.com/') upgrade your browser
+    |  to improve your experience.
+  .preloader
+   .loaded  
+  nav.navbar.navbar-default.navbar-fixed-top
+   .container
+    // Brand and toggle get grouped for better mobile display
+    .navbar-header
+     button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+     a.navbar-brand(href='#')
+      img(src='./resources/images/sNinjaNav.png', alt='')
+    // Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+     ul.nav.navbar-nav.navbar-right
+      li
+       a(href='/shiftninja/home') Home
+      li
+       a(href='/shiftninja/viewShifts') View Shifts
+      li
+       a(href='/shiftninja/recruits') View Recruits
+      li.active
+       a(href='#') Shift Creator
+      li
+       a(href='/shiftninja/addRecruit') Add Recruit
+    // /.navbar-collapse
+   // /.container-fluid
+  // Home page style
+  header#home.home
+   .container
+    .row
+     .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
+      .home-content.sections
+       h1
+        span Create New Shift
+       div
+        p
+  section.dataView-area
+   #dataView
+    form(method='POST', action='/shiftninja/newShiftData')
+      #form-group
+        label Shift ID:
+        input.form-control(name='shiftID', type='Number')
+      #form-group
+        label Assigned Recruit ID:
+        input.form-control(name='recID', type='Number')
+      #form-group
+        label Company Name:
+        input.form-control(name='shiftCompanyName', type='text') 
+      #form-group
+        label Company Address:
+        input.form-control(name='shiftAddress', type='text')
+      #form-group
+        label Role Description:
+        input.form-control(name='shiftRole', type='text')
+      #form-group
+        label Shift Starts:
+        input.form-control(name='shiftStart', type='datetime-local')
+      #form-group
+        label Shift Ends:
+        input.form-control(name='shiftEnd', type='datetime-local') 
+      #form-group
+        label Rate of Pay Catagory:
+        input.form-control(name='shiftRateCode', type='Number')   
+      #form-group
+        label Shift Pay:
+        input.form-control(name='shiftPay', type='Number')
+      br
+      input.btn.btn-primary(type='submit',value='Submit')
+  // Footer
+  footer#footer.footer.colorsbg
+   .container
+    .row
+     .col-md-6.col-sm-6.col-xs-12
+      .copyright.text-left
+       p
+        | Created by: Jerome Hurley | Powered by:
+        i.fa.fa-coffee  
+  script(src='./resources/js/vendor/jquery.js')
+  script(src='./resources/js/vendor/bootstrap.js')
+  script(src='./resources/js/jquery.magnific-popup.js')
+  script(src='./resources/js/vendor/modernizr.js')
+  script(src='./resources/js/plugins.js')
+  script(src='./resources/js/main.js')

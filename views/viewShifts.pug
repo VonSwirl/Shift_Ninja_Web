@@ -48,10 +48,10 @@ html.no-js(lang='en')
      ul.nav.navbar-nav.navbar-right
       li
        a(href='/shiftninja/home') Home
-      li
-       a(href='/shiftninja/viewshifts') View Shifts
       li.active
-       a(href='#') View Recruits
+       a(href='#') View Shifts
+      li
+       a(href='/shiftninja/recruits') View Recruits
       li
        a(href='/shiftninja/addShift') Shift Creator
       li
@@ -65,32 +65,31 @@ html.no-js(lang='en')
      .col-md-6.col-md-offset-6.col-sm-12.col-xs-12
       .home-content.sections
        h1
-        span View Recruits
+        span View Shifts
        div
         p
-       h2 Looking for Someone?
-       h2 Well your in the right place!
+       h2 Looking for a Shift?
+       h2 Look no further!
   section.dataView-area
    #dataView
-    table#viewRecruitTable.compact(cellspacing='0', width='98%')
+    table#viewShiftsTable.compact(cellspacing='0', width='98%')
      thead
       tr
        th View Details
-       th First Name
-       th Surname
-       th Fore Name
-       th Address
-       th Contact Number
-       br
+       th Shift ID
+       th Assigned Recruit ID
+       th Company 
+       th Company Address
     br
-    form(method='POST', action='/shiftninja/deleteRecruit')
-      h2 Delete Recruit
-      h4 Paste Recruit ID and click submit to delete
+    br
+    form(method='POST', action='/shiftninja/deleteShift')
+      h2 Delete Shift
+      h4 Paste shift ID and click submit to delete
       #form-group
-        label Enter Recruit ID to Delete (Warning this cannot be undone!):
-        input.form-control(name='recID', type='Number',step="any")
+        label Enter Shift ID to Delete (Warning this cannot be undone!):
+        input.form-control(name='shiftID', type='Number',step="any")
       br
-      input.btn.btn-primary(type='submit',value='Submit')
+      input.btn.btn-primary(type='submit',value='Submit')   
   // Footer
   footer#footer.footer.colorsbg
    .container
@@ -105,7 +104,7 @@ html.no-js(lang='en')
   script(src='https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.js')
   script(src='https://cdn.datatables.net/select/1.2.5/js/dataTables.select.js')
   script(src='./resources/js/vendor/jquery.dataTables.js')
-  script(src='./resources/js/recruitViewdatatable.js')
+  script(src='./resources/js/shiftViewDatatable.js')
   script(src='./resources/js/vendor/bootstrap.js')
   script(src='./resources/js/jquery.magnific-popup.js')
   script(src='./resources/js/vendor/modernizr.js')
