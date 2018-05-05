@@ -52,7 +52,7 @@ html.no-js(lang='en')
        a(href='/shiftninja/viewShifts') View Shifts
       li
        a(href='/shiftninja/recruits') View Recruits
-      li
+      li.active
        a(href='#') Shift Creator
       li
        a(href='/shiftninja/addRecruit') Add Recruit
@@ -73,31 +73,31 @@ html.no-js(lang='en')
     form(method='POST', action='/shiftninja/newShiftData')
       #form-group
         label Shift ID:
-        input.form-control(name='title', type='text')
+        input.form-control(name='shiftID', type='Number')
       #form-group
         label Assigned Recruit ID:
-        input.form-control(name='fName', type='text')
+        input.form-control(name='recID', type='Number')
       #form-group
         label Company Name:
-        input.form-control(name='sName', type='text')
+        input.form-control(name='shiftCompanyName', type='text') 
       #form-group
         label Company Address:
-        input.form-control(name='forName', type='text')
+        input.form-control(name='shiftAddress', type='text')
       #form-group
         label Role Description:
-        input.form-control(name='address', type='text')
+        input.form-control(name='shiftRole', type='text')
       #form-group
         label Shift Starts:
-        input.form-control(name='address', type='text')
+        input.form-control(name='shiftStart', type='datetime-local')
       #form-group
         label Shift Ends:
-        input.form-control(name='address', type='text') 
+        input.form-control(name='shiftEnd', type='datetime-local') 
       #form-group
         label Rate of Pay Catagory:
-        input.form-control(name='address', type='text')   
+        input.form-control(name='shiftRateCode', type='Number')   
       #form-group
         label Shift Pay:
-        input.form-control(name='mobileN', type='Number')
+        input.form-control(name='shiftPay', type='Number')
       br
       input.btn.btn-primary(type='submit',value='Submit')
   // Footer

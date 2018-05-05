@@ -13,7 +13,7 @@ const shiftsSchema = new Schema({
     shiftStart: { type: Date },
     shiftEnd: { type: Date },
     shiftRateCode: { type: Number },
-    shiftPay: { type: Float32Array }
+    shiftPay: { type: Number }
 });
 
 shiftsSchema.plugin(dataTables);
