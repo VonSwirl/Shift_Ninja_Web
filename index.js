@@ -15,15 +15,18 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 expressApp.use(flash());
-// Express Session Middleware
+
+//Express Session Middleware
 expressApp.use(require('express-session')({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true
 }));
-// Passport Middleware
+
+//Passport Middleware Initialisation call
 expressApp.use(passport.initialize());
 expressApp.use(passport.session());
+
 //This overrides the depricated mongoose Promise with node.js Promise
 mong.Promise = global.Promise;
 
@@ -32,25 +35,31 @@ var chooseEnviroment = ['development', 'local', 'deploy', 'test'];
 var useEnv = chooseEnviroment[0];
 process.env.NODE_ENV = useEnv;
 
-
 //Allows Express to use body-parser tool to handle our JSON data.
-//Allows access to jquery, css, fonts, images to views
-//App access to views folder
-//Allows Express access to recruits.js for HTTP verb functions.
-//Allow App to utilise pug for logic built pages
-//Cross-origin resource sharing (CORS)
-//Governs which referrer information is sent in the Referrer header.
 expressApp.use(bodyParser.json());
+
+//Allows access to jquery, css, fonts, images to views
 expressApp.use(bodyParser.urlencoded({ extended: true }));
-// Express Messages Middleware
+
+//App access to views folder
 expressApp.set('views', './views');
+
+//Allows Express access to recruits.js for HTTP verb functions.
 expressApp.use('/shiftninja', require('./routers/recruits'));
+
+//Ensures public folder is staic and available for assets on clientside
 expressApp.use('/shiftninja', express.static(path.join(__dirname, 'public')));
+
+//Allow App to utilise pug for logic built pages
 expressApp.set('view engine', 'pug');
+
+//Cross-origin resource sharing (CORS)
 expressApp.use(cors());
+
+//Governs which referrer information is sent in the Referrer header.
 expressApp.use(referrerPolicy({ policy: 'origin-when-cross-origin' }));
 
-// Express Validator Middleware
+//Express Validator Middleware Initialisation
 expressApp.use(expressValidator({
   errorFormatter: function (param, msg, value) {
     var namespace = param.split('.')
@@ -68,7 +77,7 @@ expressApp.use(expressValidator({
   }
 }));
 
-// Passport Config
+//Passport Config. Passes initialised passport to security passport file
 require('./security/passport')(passport);
 
 /**
@@ -78,13 +87,14 @@ require('./security/passport')(passport);
  * @param res is the response given back to client
  */
 expressApp.use(function (err, req, res, next) {
-  //Returns the error in String form to the user
   res.header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'https://apis.google.com'; Referrer-Policy 'origin-when-cross-origin';object-src 'none';img-src 'self' 'https:' 'data:';media-src 'self';frame-src 'https://www.google.co.uk/maps/';font-src 'self' 'https://www.w3.org/';connect-src 'self';style-src 'self' 'https://fonts.googleapis.com/';");
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.locals.messages = require('express-messages')(req, res);
   res.status(422).send({ error: err.message });
+  res.tatus(200).send({ error: err.message });
+  //Returns the error in String form to the console for debugging
   console.log(err, req, res);
 
 });
@@ -104,7 +114,10 @@ try {
   console.log("Check your internet connection");
 }
 
-//Populates DB with test data if development/test/local enviroment
+/**
+ * Populates DB with test data if development/test/local enviroment.
+ * This is only called if DB is empty
+ */
 if (useEnv != 'deploy') {
   Recruit.find({}, function (err, recsInDB) {
     if (!recsInDB.length) {
@@ -169,6 +182,8 @@ if (useEnv != 'deploy') {
       Recruit.create(data, function (err) { console.log(err) });
     }
   });
+
+  //This populates an empty DB with Admins if non exist.
   Admins.find({}, function (err, adminsInDB) {
     if (!adminsInDB.length) {
       var data = []
