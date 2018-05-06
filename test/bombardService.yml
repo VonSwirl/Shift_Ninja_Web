@@ -1,7 +1,10 @@
 
-//To run this test open bash/cmd in this directory and run in console; artillery run bombardService.yml
+// To run this test
+// 1) Open bash/cmd and navigate to source directory.
+// 2) Run/Debug or enter command    =>   nodemon index.js 
+// 2) Enter this command in console =>   artillery run bombardService.yml 
 {config: {
-        target: "http://localhost:3004/recruits",
+        target: "http://localhost:3000/recruits",
             phases: [{
                 duration: 30,
                 arrivalRate: 3
