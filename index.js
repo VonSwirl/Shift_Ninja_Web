@@ -1,9 +1,9 @@
 //Dependencies required by Shift Ninja Application.
 var bodyParser = require('body-parser');
 const express = require('express');
+const expressApp = express();
 const mong = require('mongoose');
 var config = require('./config');
-const expressApp = express();
 const Recruit = require('./models/recruitsModel');
 const Admins = require('./models/adminsModel')
 const path = require('path');
@@ -13,9 +13,7 @@ const pug = require('pug');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
-
-
+const bcrypt = require('bcryptjs');
 expressApp.use(flash());
 // Express Session Middleware
 expressApp.use(require('express-session')({
