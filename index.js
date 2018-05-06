@@ -33,7 +33,6 @@ mong.Promise = global.Promise;
 var chooseEnviroment = ['development', 'local', 'deploy', 'test'];
 var useEnv = chooseEnviroment[0];
 process.env.NODE_ENV = useEnv;
-process.env.port = 3000;
 
 
 //Allows Express to use body-parser tool to handle our JSON data.
@@ -197,9 +196,9 @@ if (useEnv != 'deploy') {
 };
 
 //Set Port
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 //Request Listener
-expressApp.listen(process.env.port || port, function () {
+expressApp.listen(port, function () {
   console.log(">>>> Listening on Port " + port);
 });
