@@ -16,8 +16,10 @@ const shiftsSchema = new Schema({
     shiftPay: { type: Number }
 });
 
+// Allows Datatables to read Shifts data correctly
 shiftsSchema.plugin(dataTables);
 
+// Create the Mongoose model with shiftsSchema
 var Shifts = mongoose.model('shiftsModel', shiftsSchema);
 
 //This exports the model.

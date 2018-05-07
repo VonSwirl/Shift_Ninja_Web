@@ -1,14 +1,16 @@
+// Development enviroment DB URL string returned.
 var development = 'mongodb://snwsu:snwsu1@ds014578.mlab.com:14578/shift-ninja-db'
-//  'secret':'jwtsecret' 
 
+// Test enviroment DB URL string returned.
 var test = 'mongodb://snwsu:snwsu1@ds014578.mlab.com:14578/shift-ninja-db'
-// 'secret':'jwtsecret'
 
+// Deployment enviroment DB URL string returned.
 var deploy = 'mongodb://snwsu:snwsu1@ds014578.mlab.com:14578/shift-ninja-db'
-//'secret':'jwtsecret'
 
+// Local enviroment DB URL string returned.
 var localDB = 'mongodb://localhost/recruits';
 
+// Evniroment choice param returns the related DB url string
 function configURL(enviroment) {
     switch (enviroment) {
         case
@@ -28,5 +30,5 @@ function configURL(enviroment) {
     }
 }
 
-module.exports = { configURL};
-
+// Exports the module
+module.exports = { configURL };

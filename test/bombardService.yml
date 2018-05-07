@@ -1,34 +1,123 @@
-
-//To run this test open bash/cmd in this directory and run in console; artillery run bombardService.yml
-{config: {
-        target: "http://localhost:3004/recruits",
+# To run this test:
+# 1) Open bash/cmd and navigate to directory =>   Shift_Ninja_Web/test
+# 2) Run/Debug or enter command              =>   nodemon index.js 
+# 3) Enter this command in console           =>   artillery run bombardService.yml 
+{
+    config: {
+        target: "http://localhost:3000/shiftninja",
             phases: [{
-                duration: 30,
-                arrivalRate: 3
-            }]},
-    
-    scenarios: [{
-        flow: [{
-            get: { url: "/" },
-            post: {url: "/newRecruit",
-                json: [
-                    {
-                        "ean": 'CG1',
-                        "name": 'Nut',
-                        "qtyReq": '1',
-                        "stockQty": '40',
-                        "productPrice": '40',
-                        "custoRef": 'test@test.com'
-                    },
-                    {
-                        "ean": 'CG2',
-                        "name": 'Sling',
-                        "qtyReq": '1',
-                        "stockQty": '20',
-                        "productPrice": '1',
-                        "custoRef": 'test@test.com'
-                    }]
-            }
-        }]
-    }]
+                duration: 60,
+                arrivalRate: 5
+            }]},    
+            scenarios: [{
+                flow: [{
+                    get: { url: "/" },
+                    post: {url: "/newRecData",
+                        json: [
+                                {
+                                    "recID": "001",
+                                    "recRecruitRef": "001Ref",
+                                    "recTitle": "Mr.",
+                                    "recFirstN": "John",
+                                    "recSurN": "Smith",
+                                    "recForeN": "Nelson",
+                                    "recAddress": "1 Downing Street, London, TW1 1AB",
+                                    "recMobile": "+44745297772",
+                                    "recActive": "true",
+                                    "allQuals": [
+                                    {
+                                        "qualID": "001",
+                                        "qualTitle": "shike",
+                                        "qualDateAdded": "Sun, Nov26,2017 10: 20 PM",
+                                        "qualObject": {
+                                        "qualData": "001",
+                                        "qualFileNameTwo": "QFName"
+                                        }
+                                    }
+                                    ],
+                                    "allShifts": [
+                                    {
+                                        "shiftID": "001",
+                                        "shiftCompanyName": "Company N1",
+                                        "shiftAddress": "N1 here address",
+                                        "shiftRole": "role",
+                                        "shiftStart": "Mon, Nov27, 2017 06: 20 AM",
+                                        "shiftEnd": "Mon, Nov27, 2017 07: 20 AM",
+                                        "shiftRateCode": "1",
+                                        "shiftPay": "001"
+                                    }
+                                    ]
+                                },
+                                {
+                                    "recID": "002",
+                                    "recRecruitRef": "002Ref",
+                                    "recTitle": "Mr.",
+                                    "recFirstN": "Paul",
+                                    "recSurN": "Harrison",
+                                    "recForeN": "Drake",
+                                    "recAddress": "111 Up Street, London, TW1 1TR",
+                                    "recMobile": "+44745298765",
+                                    "recActive": "true",
+                                    "allQuals": [
+                                    {
+                                        "qualID": "002",
+                                        "qualTitle": "shite",
+                                        "qualDateAdded": "Sun, Nov26,2017 10: 20 PM",
+                                        "qualObject": {
+                                        "qualData": "002",
+                                        "qualFileNameTwo": "QFName"
+                                        }
+                                    }
+                                    ],
+                                    "allShifts": [
+                                    {
+                                        "shiftID": "002",
+                                        "shiftCompanyName": "Company N1",
+                                        "shiftAddress": "N1 here address",
+                                        "shiftRole": "role",
+                                        "shiftStart": "Mon, Nov27, 2017 06: 20 AM",
+                                        "shiftEnd": "Mon, Nov27, 2017 07: 20 AM",
+                                        "shiftRateCode": "1",
+                                        "shiftPay": "100"
+                                    }
+                                    ]
+                                },
+                                {
+                                    "recID": "003",
+                                    "recRecruitRef": "003Ref",
+                                    "recTitle": "Mrs.",
+                                    "recFirstN": "Emma",
+                                    "recSurN": "Bates",
+                                    "recForeN": "Nike",
+                                    "recAddress": "22 Right Street, London, TW1 1XX",
+                                    "recMobile": "+44745292255",
+                                    "recActive": "false",
+                                    "allQuals": [
+                                    {
+                                        "qualID": "003",
+                                        "qualTitle": "shite",
+                                        "qualDateAdded": "Sun, Nov26,2017 10: 20 PM",
+                                        "qualObject": {
+                                        "qualData": "003",
+                                        "qualFileNameTwo": "QFName"
+                                        }
+                                    }
+                                    ],
+                                    "allShifts": [
+                                    {
+                                        "shiftID": "003",
+                                        "shiftCompanyName": "Company N1",
+                                        "shiftAddress": "N1 here address",
+                                        "shiftRole": "role",
+                                        "shiftStart": "Mon, Nov27, 2017 06: 20 AM",
+                                        "shiftEnd": "Mon, Nov27, 2017 07: 20 AM",
+                                        "shiftRateCode": "1",
+                                        "shiftPay": "100"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }]
+            }]
 }
