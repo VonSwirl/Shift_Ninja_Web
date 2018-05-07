@@ -1,3 +1,4 @@
+// Local environment variables
 {
     "git.ignoreLimitWarning": false,
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\system32\\cmd.exe",

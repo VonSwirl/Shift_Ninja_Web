@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const dataTables = require('mongoose-datatables');
+
 //Creates a separate schema that allows the shift events to be stored as an array of object
 const shiftEventsSchema = new Schema({
     shiftID: { type: Number },
@@ -29,20 +30,20 @@ const recruitsSchema = new Schema({
     recFirstN: { type: String },
     recSurN: { type: String },
     recForeN: { type: String },
-    recAddress: {type: String},
-    recMobile:{type: Number},
+    recAddress: { type: String },
+    recMobile: { type: Number },
     allQuals: [qualificationsSchema],
     recActive: { type: Boolean, default: true },
     recExperience: { type: String },
-    recProfilePic: {  data: Buffer, contentType: String },
+    recProfilePic: { data: Buffer, contentType: String },
     allShifts: [shiftEventsSchema]
 });
 
+// Allows Datatables to read Recruit data correctly
 recruitsSchema.plugin(dataTables);
 
+// Create the Mongoose model with recruits
 var Recruit = mongoose.model('recruitsModel', recruitsSchema);
 
 //This exports the model.
 module.exports = Recruit;
-
-

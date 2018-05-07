@@ -161,8 +161,8 @@ describe('#### SHIFT NINJA WEB, MOCHA TEST SUITE ####' +
         }).then(table => {
           expect(table.data.length).equal(3)
           expect(table.data[0].name).equal('John Smith')
-          expect(table.data[1].name).equal('Antonio Garcia')
-          expect(table.data[2].name).equal('Ant Gar')
+          expect(table.data[1].name).equal('Paul Harrison')
+          expect(table.data[2].name).equal('Emma Bates')
           done()
         }).catch(done)
       })

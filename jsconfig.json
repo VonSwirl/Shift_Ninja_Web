@@ -1,3 +1,4 @@
+// Avoids invalid / unnecessary errors 
 {
     "compilerOptions": {
         "experimentalDecorators": true

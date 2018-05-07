@@ -11,8 +11,10 @@ const adminsSchema = new Schema({
     adminPassword: { type: String },
 });
 
+// Allows Datatables to read Admin data correctly
 adminsSchema.plugin(dataTables);
 
+//Create the Mongoose model with adminsSchema
 var Admins = mongoose.model('adminsModel', adminsSchema);
 
 //This exports the model.

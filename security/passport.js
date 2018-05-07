@@ -25,10 +25,12 @@ module.exports = function (passport) {
         });
     }));
 
+    // Creates a hash of the password
     passport.serializeUser(function (admin, done) {
         done(null, admin.id);
     });
 
+    // Decrypt hash back to original
     passport.deserializeUser(function (id, done) {
         Admin.findById(id, function (err, admin) {
             done(err, admin);
